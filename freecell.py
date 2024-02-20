@@ -19,21 +19,23 @@ class Deck:
     def __init__(self):
         self.cards = []
         for suit in ["hearts", "diamonds", "clubs", "spades"]:
-            for order, value in enumerate([
-                "A",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "J",
-                "Q",
-                "K",
-            ]):
+            for order, value in enumerate(
+                [
+                    "A",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "J",
+                    "Q",
+                    "K",
+                ]
+            ):
                 self.cards.append(Card(suit, value, order))
 
     def shuffle(self):
@@ -103,7 +105,7 @@ class FreeCellGame:
 
     def deal(self):
         for i in range(len(self.deck.cards)):
-        # for i in range(len(self.deck)):
+            # for i in range(len(self.deck)):
             self.tableau[i % 8].append(self.deck.pop())
 
     def max_stack(self):
@@ -122,8 +124,16 @@ class FreeCellGame:
                 break
         return max_stack
 
+    def number_of_empty_piles(self):
+        empty_piles = 0
+        for pile in self.tableau:
+            if len(pile) == 0:
+                empty_piles += 1
+        return empty_piles
+
     def move(self, source, target):
         """written by copilot. This is a placeholder for the move function."""
+
         if source == "deck":
             if target == "freecell":
                 for pile in self.freecells:
@@ -170,8 +180,9 @@ class FreeCellGame:
                         break
 
     def is_won(self):
-        '''Returns True if the game is won, False otherwise.
-        This code was written by copilot. Logic to check a win condition is not implemented yet.'''
+        """Returns True if the game is won, False otherwise.
+        This code was written by copilot. Logic to check a win condition is not implemented yet.
+        """
         for pile in self.foundations:
             if pile.is_empty():
                 return False
